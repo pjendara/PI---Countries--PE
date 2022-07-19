@@ -8,9 +8,9 @@ const router = Router();
 
 //trae los paises de la API
 const getApiInfo = async () => {
-    const apiUrl = await axios.get("https://restcountries.com/v3/all")
+    try {const apiUrl = await axios.get("https://restcountries.com/v3/all")
     const apiInfo = await apiUrl.data.map(e => {
-      const country = {
+      return {
         id: e.cca3,
         name: e.name.common,
         imgFlag: e.flags[1],
@@ -19,28 +19,33 @@ const getApiInfo = async () => {
         subregion: e.subregion,
         area: e.area,
         population: e.population
-        }
-        return country
-      })
-    return apiInfo
+        }})
+        await Country.bulkCreate(apiInfo) 
+        console.log("creado")
+        return apiInfo
+    }
+            
+    catch(error){
+        console.log(error)
+    }
 };
 
 
 //Si la DB esta vacía ==> la llena con la info de la Api segun el modelo
-const fillDb = async () => {
-    try {
-        const onCountries = await Country.findall();
-        if(!onCountries){
-            const fillCountries = await getApiInfo();
-            await Country.findOrCreate(fillCountries)
-        }
-    } catch (error) {
-        console.error();
-    }
-}
+//const fillDb = async () => {
+    // try {
+    //     const onCountries = await Country.findall();
+    //     if(!onCountries){
+    //         const fillCountries = await getApiInfo();
+    //         await Country.findOrCreate(fillCountries)
+    //     }
+    // } catch (error) {
+    //     console.error();
+    // }
+//}
 
-const loadCountries = async () => { await fillDb() }
-loadCountries()
+// const loadCountries = async () => { await fillDb() }
+// loadCountries()
 
 
 //Ruta general de todos los paises o por Query
@@ -55,6 +60,7 @@ router.get("/countries", async (req,res) => {
     } else {
         res.status(200).send(globalCountries)
     }
+
 })
 
 
@@ -74,3 +80,4 @@ router.get('countries/:idPais', async function (req, res) {
 })
 
 module.exports = router;
+
