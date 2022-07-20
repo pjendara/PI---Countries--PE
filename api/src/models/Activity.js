@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     
-    sequelize.define('activities', {
+    sequelize.define('Activity', {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -21,8 +21,17 @@ module.exports = (sequelize) => {
         }
       },
       duration: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          min: 1,
+          max: 24,
+          isEven(value) {
+            if(value < 1 || value > 24) {
+              throw new Error('La duración debe ser de 1 a 24')
+            }
+          } 
+        }   
       },
       season: {
         type: DataTypes.ENUM("Verano", "Otoño", "Invierno", "Primavera"),
