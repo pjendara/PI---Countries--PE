@@ -45,8 +45,10 @@ const getApiInfo = async () => {
 
 //Ruta general de todos los paises o por Query
 router.get("/countries", async (req, res) => {
-    const nameQuery = req.query.name
-    const name = nameQuery.charAt(0).toUpperCase() + nameQuery.slice(1);
+    // const nameQuery = req.query.name
+    // const name = nameQuery.charAt(0).toUpperCase() + nameQuery.slice(1);
+
+    const name = req.query.name
         
     try{
        if(!name){

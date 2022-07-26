@@ -19,11 +19,11 @@ router.get('/activities', async (req, res) => {
 
 
 //Ruta de posteo de nueva actividad
-router.post('/activities', async (req, res, next) => {
-    const { name, difficulty, duration, season } = req.body;
+router.post('/activities', async (req, res,) => {
+    const { name, difficulty, duration, season, countries } = req.body;
 
-    if(!name || !difficulty || !duration || !season){
-        return res.status(404).send("Campos incompletos");
+    if(!name || !difficulty || !duration || !season || !countries){
+        return res.status(400).send("Campos incompletos");
     }
 
 try{
@@ -32,18 +32,25 @@ try{
         difficulty,
         duration,
         season,
-        
+              
     })
+
+    countries.forEach(async (id) => {
+      const country = await Country.findOne({
+          where: {id: {[Op.iLike]:`%${id}%`}}
+              })
+      await country?.addActivity(Activity);
+    })
+    //if(country) await newActivity
     res.status(200).json(newActivity)
    
-    const activityId = await Activity.findAll ({
-        where: {name : name} 
-    })
+    
         
   } catch (error) {
-    next(error);
+    res.send(error);
   }
 });  
+
 
 
 module.exports = router;
