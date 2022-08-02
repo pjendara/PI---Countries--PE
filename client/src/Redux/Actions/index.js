@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FILTER_COUNTRIES, GET_COUNTRIES, ORDER_COUNTRIES_ALF, ORDER_COUNTRIES_POP ,GET_TOURIST_ACTIVITIES, GET_COUNTRY_DETAIL } from "../action-types/actionTypes"; 
+import { FILTER_COUNTRIES, GET_COUNTRIES, ORDER_COUNTRIES_ALF, ORDER_COUNTRIES_POP ,GET_TOURIST_ACTIVITIES, GET_COUNTRY_DETAIL, GET_COUNTRIES_QUERY, FILTER_BY_ACTIVITIES } from "../action-types/actionTypes"; 
 
 export function getCountries(){
     return async function(dispatch){
@@ -51,12 +51,12 @@ export function getCountriesDetail(id){
     }
 }
 
-export function getCountriesQuery(name){
+export default function getCountriesSearch(name){
     return async function (dispatch){
         try {
             var json = await axios.get("http://localhost:3001/countries?name=" + name.charAt(0).toUpperCase() + name.slice(1))
             return dispatch ({
-                type: GET_COUNTRY_DETAIL,
+                type: GET_COUNTRIES_QUERY,
                 payload: json.data
             })
         } catch (error){
@@ -68,24 +68,27 @@ export function getCountriesQuery(name){
     }
 }
 
-export function filterActivity(payload){
+export function filterByAct(activity){
     return{
-        type: GET_TOURIST_ACTIVITIES,
-        payload
+        type: FILTER_BY_ACTIVITIES,
+        payload: activity
     }
 }
 
 export function getActivities(){
-    return async function(dispatch){
-        let json = await axios.get("http://localhost:3001/activities",{
-            
-        });
-    return dispatch({
-        type: GET_TOURIST_ACTIVITIES,
-        payload: json.data
-    })
-    }
-}
+    return (dispatch) => {
+        axios
+          .get(`http://localhost:3001/activities`)
+          .then((info) => {
+            return dispatch({
+              type: GET_TOURIST_ACTIVITIES,
+              payload: info.data,
+            });
+          })
+          .catch((err) => console.log(err));
+      };
+    };
+
 
 export function postActivity (payload){
     return async function(dispatch){

@@ -1,0 +1,22 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.prindiv {
+    background-image: url('../Images/home.png');
+    background-size: cover;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 100%;
+    position: absolute;
+}
+

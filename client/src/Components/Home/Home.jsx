@@ -1,22 +1,25 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector} from "react-redux"
-import { getCountries, filterByContinents, orderByName, orderByPop } from "../../Redux/Actions"; 
+import { useDispatch, useSelector} from "react-redux";
+import { getCountries, filterByContinents, orderByName, orderByPop, filterByAct, getActivities } from "../../Redux/Actions"; 
 import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
 import NavBar from "../NavBar/NavBar";
+
+import s from "./Home.module.css"
 
 
 export default function Home (){
 
     const dispatch = useDispatch()
     const allCountries = useSelector ((state) => state.countries)
+    const activities = useSelector ((state) => state.allActivities)
 
     const [orden, setOrden]= useState("")
 
     const [currentPage, setCurrentPage] = useState(1)
     let [countriesPerPage, setCountriesPerPage] = useState(10)
-            if(currentPage === 1) countriesPerPage = 9;
+            currentPage === 1? countriesPerPage = 9 : countriesPerPage = 10;
 
     const indexOfLastCountrie = currentPage * countriesPerPage
     const indexOfFirstCountrie = indexOfLastCountrie - countriesPerPage
@@ -28,13 +31,8 @@ export default function Home (){
 
     useEffect (() => {
         dispatch(getCountries());
+        dispatch(getActivities());
     },[dispatch])
-
-    // function handleClick(e){
-    //     e.preventDefault()
-    //     dispatch()
-    // }
-
 
     function handleFilteredCountrie(e){
         dispatch(filterByContinents(e.target.value))
@@ -54,24 +52,40 @@ export default function Home (){
         setOrden(`Ordenado ${e.target.value}`)
     };
 
+    function handleFilterByAct(e){
+        e.preventDefault()
+        e.target.value === "none" ? dispatch(getCountries()):
+        dispatch(filterByAct(e.target.value))
+        setCurrentPage(1)
+    }
+
+    
+
     return (
-        <div>
+        <div className={s.prindiv}>
             
-                <div>Encuentra Tu Próximo Destino</div>
+            <div ><NavBar/></div>
             
-            <NavBar/>
+            <div className={s.filtros}>
             <div>
-            <select onChange={e => handleSort(e)}>
+                Ordena Alfabéticamente    
+            <select className={s.select} onChange={e => handleSort(e)}>
                 <option></option>
                 <option value="asc">Ascendente</option>
                 <option value="desc">Descendente</option>
             </select>
-            <select onChange={e => handleSortPop(e)}>
+            </div>
+            <div>
+                Ordena por Número de Habitantes
+            <select className={s.select} onChange={e => handleSortPop(e)}>
                 <option></option>
                 <option value="mayp">Menor a Mayor</option>
                 <option value="menp">Mayor a Menor</option>
             </select>
-            <select onChange={e => handleFilteredCountrie(e)}>
+            </div>
+            <div>
+                Busca por Continentes
+            <select className={s.select} onChange={e => handleFilteredCountrie(e)}>
                 <option value={"All"}> </option>
                 <option value={"South America"}>Sudamérica</option>
                 <option value={"North America"}>Norteamérica</option>
@@ -81,27 +95,35 @@ export default function Home (){
                 <option value={"Oceania"}>Oceanía</option>
                 <option value={"Antarctica"}>Antarctica</option>
             </select>
-            <select>
-                <option value="act">Actividad Turística</option>
-            </select>
-           
+            </div>
+            <div>
+                Busca por Actividad
+                {(activities.length === 0)? <p>No se han creado actividades</p> :
+                <select className={s.select} onChange={e => handleFilterByAct(e)}>
+                <option value="none"></option>
+                {activities.map(e => (
+                <option value={e.name} key={e.id}>{e.name}</option>
+                ))}
+                </select>
+                }
+            </div>
+            </div>
            {currentCountries?.map( (e) => {
                return (
-                <div key={e.id}>
+                <div className={s.contenedorCards}>
                 <Card imgFlag={e.imgFlag} name={e.name} continent={e.continent} key={e.id} id={e.id} />
                 </div>
             )
         })}
-
+            <div className={s.paginado}>
             <Paginado
             countriesPerPage = {countriesPerPage}
             allCountries = {allCountries.length}
             paginado = {paginado}
             /> 
-
+            </div>
+        
         </div>
-        </div>
-       
     )
 }
 

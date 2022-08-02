@@ -1,9 +1,10 @@
-import { FILTER_COUNTRIES, GET_COUNTRIES, GET_TOURIST_ACTIVITIES, ORDER_COUNTRIES_ALF, ORDER_COUNTRIES_POP, GET_COUNTRY_DETAIL, ADD_TOURIST_ACTIVITIES } from "../action-types/actionTypes";
+import { FILTER_COUNTRIES, FILTER_BY_ACTIVITIES, GET_COUNTRIES, GET_TOURIST_ACTIVITIES, ORDER_COUNTRIES_ALF, ORDER_COUNTRIES_POP, GET_COUNTRY_DETAIL, ADD_TOURIST_ACTIVITIES, GET_COUNTRIES_QUERY } from "../action-types/actionTypes";
 
 const initialState = {
     countries: [],
     allCountries: [],
     allActivities: [],
+    activities: [],
     detail: {}
 };
 
@@ -80,12 +81,38 @@ function rootReducer (state = initialState, action){
                 ...state,
             }           
         case GET_TOURIST_ACTIVITIES:
-            const allActivities = state.allActivities 
-            const activityFiltered = action.payload === "All" ? allActivities : allActivities.filter(e => e.name === action.payload)
             return{
                 ...state,
-                activities: activityFiltered
+                allActivities: action.payload
             }
+        case GET_COUNTRIES_QUERY:
+            return{
+                ...state,
+                countries: action.payload
+            }
+        case FILTER_BY_ACTIVITIES:
+            const allCountries2 = state.allCountries;
+
+      const solo = allCountries2.filter((pais) => {
+        return pais.Activities.length > 0;
+      });
+
+      let array = [];
+
+      for (let i = 0; i < solo.length; i++) {
+        for (let j = 0; j < solo[i].Activities.length; j++) {
+          if (solo[i].Activities[j].name === action.payload) {
+            array.push(solo[i]);
+          }
+        }
+      }
+
+      const filtro = action.payload === "Todos" ? allCountries2 : array;
+
+      return {
+        ...state,
+        countries: filtro,
+      }    
         default:
             return state;
     

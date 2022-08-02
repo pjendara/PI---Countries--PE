@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { Activity, Country } = require('../db.js');
+const { Op } = require("sequelize")
 
 
 const router = Router();
@@ -11,7 +12,7 @@ router.get('/activities', async (req, res) => {
     if(activities) {
       return res.status(200).json(activities);
     } else {
-      return res.status(404).json("No se encontraron activdades"); 
+      return res.status(404).json(activities.length ? activities :"No se encontraron activdades"); 
     }
   
   });
@@ -19,38 +20,64 @@ router.get('/activities', async (req, res) => {
 
 
 //Ruta de posteo de nueva actividad
-router.post('/activities', async (req, res,) => {
-    const { name, difficulty, duration, season, countries } = req.body;
+// router.post('/activities', async (req, res,) => {
+//     const { name, difficulty, duration, season, countries } = req.body;
 
-    if(!name || !difficulty || !duration || !season || !countries){
-        return res.status(400).send("Campos incompletos");
-    }
+//     if(!name || !difficulty || !duration || !season || !countries){
+//         return res.status(400).send("Campos incompletos");
+//     }
 
-try{
-    const newActivity = await Activity.create ({
-        name,
-        difficulty,
-        duration,
-        season,
+// try{
+//     const newActivity = await Activity.create ({
+//         name,
+//         difficulty,
+//         duration,
+//         season,
+//         countries
               
-    })
+//     })
 
-    countries.forEach(async (id) => {
-      const country = await Country.findOne({
-          where: {id: {[Op.iLike]:`%${id}%`}}
-              })
-      await country?.addActivity(Activity);
-    })
-    //if(country) await newActivity
-    res.status(200).json(newActivity)
+//     res.status(200).json(newActivity)
    
-    
-        
-  } catch (error) {
-    res.send(error);
-  }
-});  
+//     const getId = await Activity.findAll({
+//       where: { name: name}
+//     })
 
+//     const country = await Country.findByPk(countries);
+//     await country.addActivity(getId[0].dataValues.id);
+        
+//   } catch (error) {
+//     res.send(error);
+//   }
+// });  
+
+router.post('/activities', async (req, res,) => {
+  try {
+    const {name, difficulty, duration, season, countries} = req.body
+    if(name && difficulty && duration && season && countries){
+        const activity = await Activity.create({
+                name,
+                difficulty,
+                duration,
+                season         
+            });
+
+        countries.forEach(async (id) => {
+            const country = await Country.findOne({
+                where: {id: {[Op.iLike]:`%${id}%`}}
+                    })
+            await country?.addActivity(activity);
+        })
+
+        return res.send(activity)
+    } else {
+        return res.status(404).json('Missing data')
+    }
+} catch (error) {
+    next(error)
+}
+}
+)
 
 
 module.exports = router;

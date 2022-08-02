@@ -1,0 +1,49 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.homepage {
+    background-image: url('../Images/landing.png');
+    background-size: cover;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+
+    
+}
+
+
+.boton {
+    border-radius: 10%;
+    background-color: rgba(8, 90, 242, 0.915);
+    font-size: large;
+    font-style: normal;
+    border-color: cornflowerblue;
+    color: white; 
+    position: absolute;
+    top: 577px;
+    left: 700px;
+    padding: 7px;
+    box-shadow: 6px;
+    
+}
+
+.boton:hover {
+    background-color:gold ;
+    color: cornflowerblue;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.autor {
+    position: relative;
+    top: 897px;
+    left: 1220px;
+    
+    
+}
+.pautor {
+    color: gold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

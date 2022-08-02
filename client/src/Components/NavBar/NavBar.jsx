@@ -1,40 +1,50 @@
-import {React, useState} from "react";
+import { React } from "react";
 import { Link } from "react-router-dom";
+import getCountriesSearch from "../../Redux/Actions";
 import { useDispatch } from "react-redux";
-import { getCountries, getCountriesDetail } from "../../Redux/Actions";
+import { useState } from "react";
+import { getCountries } from "../../Redux/Actions";
+
+import s from "./NavBar.module.css"
+
+import logo from "../Images/logo.png"
+
+export default function NavBar(){
+
+const dispatch = useDispatch()
+const [name, setName] = useState("")
 
 function handleClick(e){
     e.preventDefault();
-    dispatchEvent(getCountries());
+    dispatch(getCountries());
+    
 }
 
-export default function NavBar(){
-    const dispatch = useDispatch()
-    const [name, setName] = useState("")
+function handleSubmitBuscar(e){
+    e.preventDefault()
+    dispatch(getCountriesSearch(name))
+}
 
-    function handleInputChange(e){
-        e.preventDefault()
-        setName(e.target.value)
-    }
+function handleInputChange(e){
+    e.preventDefault()
+    setName(e.target.value)
+}
 
-    function handleSubmit(e){
-        e.preventDefault()
-        dispatch(getCountriesDetail(name))
-    }
-
+    
 return (
+    <div className={s.navbar}>
     <div>
-        <input
-        type = "text"
-        placeholder = "Qué país deseas visitar..."
-        onChange = {(e) => handleInputChange(e)}
-        />
-        <button type="submit" onClick={(e) => handleSubmit(e)}>Buscar</button>
-    <Link to= "/activities"><button>Crear Actividad</button></Link>
-    <Link to= "/home"><button onClick={e => {handleClick(e)}}>
-        Inicio
-    </button></Link>
+    <Link to= "/home"><img className={s.bothome} onClick={(e) => handleClick(e)} src={logo} alt="logo"></img></Link>
     </div>
+    <div className={s.search}>
+            <div className={s.searchtitle} >Encuentra Tu Próximo Destino</div>    
+            <input className={s.searchinp} type = "text" placeholder = "Qué país deseas visitar..."
+            onChange = {(e) => handleInputChange(e)} />
+            <button className={s.searchbot} type="submit" onClick={(e) => handleSubmitBuscar(e)}>Buscar</button>
+            </div>
+    <Link to= "/activities"><button className={s.botact}>Crear Actividad</button></Link>       
+    </div>
+    
 )
 
 }

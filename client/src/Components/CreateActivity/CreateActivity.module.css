@@ -1,0 +1,9 @@
+.prindiv {
+    background-image: url('../Images/home.png');
+    background-size: cover;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+}

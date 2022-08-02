@@ -1,0 +1,54 @@
+.card{
+    border-radius: 3%;
+    background-color: rgba(239, 236, 216, 0.69);
+    height: 300px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.bandera{
+    border-radius: 4%;
+    width: 9em;
+    height: 6em;
+    position: relative;
+    top: -30px;
+    left: 78px;
+}
+
+.titulo{
+    color: rgb(9, 57, 154);
+    font-weight: bolder;
+    font-size: x-large;
+    text-align: center;
+    margin-bottom: 5px; 
+    margin-left: 10px;
+    margin-right: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.continente {
+    color: rgb(9, 57, 154);
+    text-align: center;
+}
+
+.boton {
+    border-radius: 5px;
+    color:rgb(194, 233, 255);
+    background-color: #07648f;
+    width: 5em;
+    padding: 3px;
+    border-color: #07648f;
+    position: relative;
+    top: 20px
+}
+
+.boton:hover {
+    color: rgba(237, 171, 72, 0.91);
+    background-color: rgb(28, 14, 2);
+    border-color: rgb(28, 14, 2);
+}
