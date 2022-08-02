@@ -1,9 +1,121 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
 .prindiv {
     background-image: url('../Images/home.png');
     background-size: cover;
-    height: 100vh;
+    width: auto;
+    height: 120vh;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    align-content: center;
+    justify-content: center;
+ 
+}
+
+.bar {
+    background-color: #FDC500;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    width: 100%;
+    display: inline-flex;
+       
+}
+
+.bothome {
+    height: 115px;
+        
+}
+
+.bothome:hover {
+    height: 106px;
+    opacity: 90%;
+}
+
+.contenedorform {
+    border-radius: 3%;
+    margin: 40px;
+    background-color: rgba(239, 236, 216, 0.69);
+    min-height: 400px;
+    width: fit-content;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    width: 100%;
+    padding: 35px;
+    display: inline-block;
+    
+}
+
+.titulof {
+    color: rgb(58, 76, 90);
+    text-align: center;
+}
+
+.campos {
+    color: rgb(9, 57, 154);
+    text-align: right;
+    font-size: large;
+    margin: 5px;
+        
+}
+
+.inputs {
+    border-color: rgba(239, 236, 216, 0.69);
+    border-radius: 4px;
+    width: 120px;
+    font-size: medium;
+    color: rgb(113, 99, 18);
+    margin-top: 5px;
+    margin-bottom: 8px;
+    
+}
+
+.botsub {
+    font-weight: bold;
+    font-size: x-small;
+    padding: 4px;
+    margin: 20px;
+    font-family:'Verdana';
+    background-color: antiquewhite;
+    border-color: #07648f;
+    color: #07648f;
+    border-radius: 5px;
+
+}
+
+.botsub:hover {
+    background-color: #FFCC33;
+    border-color: rgb(235, 174, 19);
+    color: rgb(131, 89, 33);
+}
+
+.conpais{
+    display:inline-flex;
+    flex-flow: row;
+}
+
+.mpais {
+    color: rgb(9, 57, 154);
+    text-align: center;
+    font-size: large;
+    margin: 5px;
+    font-weight: bold;  
+}
+
+.botelim {
+    font-size: x-small;
+    font-weight: bold;
+    background-color: red;
+    border-radius: 100%;
+    border-width: 0ch;
+    height: fit-content;
+    width: fit-content;
+}
+
+.errors {
+    font-size: small;
+    color: red;
+    margin: 3px;
 }

@@ -4,6 +4,7 @@ import LandingPage from './Components/LandingPage/LandingPage';
 import Home from './Components/Home/Home';
 import CreateActivity from './Components/CreateActivity/CreateActivity';
 import CountryDetail from './Components/CountryDetail/CountryDetail';
+import NavBar from './Components/NavBar/NavBar';
 
 function App() {
   return (
@@ -14,7 +15,6 @@ function App() {
         <Route path= "/home" component = {Home}/>
         <Route path= "/activities" component= {CreateActivity}/>
         <Route path= "/countries/:id" component= {CountryDetail}/>
-        <h1>Henry Countries</h1>
       </Switch>
       
     </div>

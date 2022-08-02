@@ -15,7 +15,7 @@ html, body {
 
 
 .boton {
-    border-radius: 10%;
+    border-radius: 10px;
     background-color: rgba(8, 90, 242, 0.915);
     font-size: large;
     font-style: normal;
@@ -38,7 +38,7 @@ html, body {
 
 .autor {
     position: relative;
-    top: 897px;
+    top: 875px;
     left: 1220px;
     
     

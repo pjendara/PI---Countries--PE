@@ -12,7 +12,7 @@ import logo from "../Images/logo.png"
 export default function NavBar(){
 
 const dispatch = useDispatch()
-const [name, setName] = useState("")
+const [value, setValue] = useState("")
 
 function handleClick(e){
     e.preventDefault();
@@ -22,12 +22,16 @@ function handleClick(e){
 
 function handleSubmitBuscar(e){
     e.preventDefault()
-    dispatch(getCountriesSearch(name))
+    dispatch(getCountriesSearch(value))
+    if(!value) alert("Ingrese al menos una letra para su búsqueda")
+    
+    
 }
 
 function handleInputChange(e){
     e.preventDefault()
-    setName(e.target.value)
+    setValue(e.target.value)
+    
 }
 
     

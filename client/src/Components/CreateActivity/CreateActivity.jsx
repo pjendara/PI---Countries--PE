@@ -3,7 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries, postActivity } from "../../Redux/Actions";
 
-import style from "./CreateActivity.module.css"
+import s from "./CreateActivity.module.css"
+import logo from "../Images/logo.png"
 
 function validate(input){
     let errors = {}
@@ -21,7 +22,7 @@ function validate(input){
         
     if(!input.season || input.season === "vacio") errors.season = "Campo Necesario"
     
-    if(!input.countries) errors.countries = "Campo Necesario"
+    if(!input.countries || input.countries.length === 0) errors.countries = "Campo Necesario"
 
     return errors;
 }
@@ -41,6 +42,10 @@ export default function CreateActivity(){
 
     })
 
+    useEffect (() => {
+        dispatch(getCountries());
+    },[dispatch])
+
     function handleChange(e){
         setInput({
             ...input,
@@ -55,7 +60,7 @@ export default function CreateActivity(){
 
     const handleSelect = (e) => {
         setInput((estado) => {
-            if(e.target.name === "countryId") {
+            if(e.target.name === "countries") {
                 return {
                     ...estado,
                     countries: [...estado.countries, e.target.value]
@@ -94,65 +99,76 @@ export default function CreateActivity(){
         })
     }
 
+    function handleClick(e){
+        e.preventDefault();
+        history.push("/home")
+        
+    }
+
     useEffect(() => {
         dispatch(getCountries())
     }, [])
 
 
     return(
-        <div className={style.prindiv}>
-            <h1>Crea tu Actividad Turística</h1>
+        <div className={s.prindiv}>
+            <div className={s.bar}>
+            <Link to= "/home"><img className={s.bothome} onClick={(e) => handleClick(e)} src={logo} alt="logo"></img></Link>
+            </div>
+            <div className={s.contenedorform}>
+            <h2 className={s.titulof}>Crea tu Actividad Turística</h2>
             <form onSubmit={(e)=> handleSubmit(e)}>
                 <div>
-                    <label>Nombre: </label>
-                    <input type="text" value= {input.name} name= "name" onChange={(e)=> handleChange(e)}/>
-                    {errors.name && (<p className="error">{errors.name}</p>)}
+                    <label className={s.campos}>Nombre: </label>
+                    <input className={s.inputs} type="text" value= {input.name} name= "name" onChange={(e)=> handleChange(e)}/>
+                    {errors.name && (<p className={s.errors}>{errors.name}</p>)}
                 </div>
                 <div>
-                    <label>Escoja el país para su actividad</label>
-                    <select name="countryId" id="countryId" onChange={(e) => handleSelect(e)}>
-                            <option value=""></option>                      
+                    <label className={s.campos}>Escoja el país para su actividad: </label>
+                    <select className={s.inputs} name="countries" id="countries" onChange={(e) => handleSelect(e)}>
+                            <option> </option>                      
                         {countries.map((con) => (
                             <option value={con.id}>{con.name}</option>
                         ))}
                     </select>
-                    {errors.countries && (<p className="error">{errors.countries}</p>)}
+                    {errors.countries && (<p className={s.errors}>{errors.countries}</p>)}
                 {/* <ul><li>{input.countryId.map(e => e + " , ")}</li></ul> */}
                 </div>
                 <div>
-                    <label>Temporada: </label>
-                    <select name="season" id="season" onChange={(e) => handleSelect(e)}>
+                    <label className={s.campos}>Temporada: </label>
+                    <select className={s.inputs} name="season" id="season" onChange={(e) => handleSelect(e)}>
                     <option value="vacio"> </option>
                             <option value={"Verano"}>Verano </option>
                             <option value={"Invierno"}>Invierno </option>
                             <option value={"Primavera"}>Primavera </option>
                             <option value={"Otoño"}>Otoño </option>
                     </select>
-                    {errors.season && (<p className="error">{errors.season}</p>)}
+                    {errors.season && (<p className={s.errors}>{errors.season}</p>)}
                 </div>
                 <div>
-                    <label>Dificultad: </label>
-                    <input type="number" value= {input.difficulty} name= "difficulty" onChange={(e)=> handleChange(e)}/>
-                    {errors.difficulty && (<p className="error">{errors.difficulty}</p>)}
+                    <label className={s.campos}>Dificultad: </label>
+                    <input className={s.inputs} type="number" value= {input.difficulty} name= "difficulty" onChange={(e)=> handleChange(e)}/>
+                    {errors.difficulty && (<p className={s.errors}>{errors.difficulty}</p>)}
                 </div>
                 <div>
-                    <label>Duración: </label>
-                    <input type="number" value= {input.duration} name= "duration" onChange={(e)=> handleChange(e)}/>
-                    <label> horas</label>
-                    {errors.duration && (<p className="error">{errors.duration}</p>)}
+                    <label className={s.campos}>Duración: </label>
+                    <input className={s.inputs} type="number" value= {input.duration} name= "duration" onChange={(e)=> handleChange(e)}/>
+                    <label className={s.campos}> horas</label>
+                    {errors.duration && (<p className={s.errors}>{errors.duration}</p>)}
                 </div>
                 <div>
-                    <button type="submit" disabled={Object.keys(errors).length === 0 ? false : true}>Añadir Actividad</button>
+                    <button className={s.botsub} type="submit" disabled={Object.keys(errors).length === 0 ? false : true}>Añadir Actividad</button>
                 </div>
                 
             </form>
                 
                 {input.countries.map(e =>
-                    <div className="selCoun">
-                        <p>{e}</p>
-                        <button className="botonX" onClick={()=> handleDelete(e)}>X</button>
+                    <div className={s.conpais}>
+                        <p className={s.mpais}> {e} </p>
+                        <button className={s.botelim} onClick={()=> handleDelete(e)}>X </button>
                     </div>    
                     )}
+                </div>    
         </div>
     )
 }

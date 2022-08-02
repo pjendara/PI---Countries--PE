@@ -19,7 +19,9 @@ export default function Home (){
 
     const [currentPage, setCurrentPage] = useState(1)
     let [countriesPerPage, setCountriesPerPage] = useState(10)
-            currentPage === 1? countriesPerPage = 9 : countriesPerPage = 10;
+    if(currentPage === 1) countriesPerPage = 9;
+    
+            
 
     const indexOfLastCountrie = currentPage * countriesPerPage
     const indexOfFirstCountrie = indexOfLastCountrie - countriesPerPage
