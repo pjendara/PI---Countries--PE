@@ -4,7 +4,6 @@ import { FILTER_COUNTRIES, GET_COUNTRIES, ORDER_COUNTRIES_ALF, ORDER_COUNTRIES_P
 export function getCountries(){
     return async function(dispatch){
         let json = await axios.get("http://localhost:3001/countries",{
-            
         });
     return dispatch({
         type: GET_COUNTRIES,
@@ -43,7 +42,7 @@ export function getCountriesDetail(id){
                 payload: json.data
             })
         } catch (error){
-            console.log(error);
+          console.log(error);
         }
         
 
@@ -60,11 +59,8 @@ export default function getCountriesSearch(name){
                 payload: json.data
             })
         } catch (error){
-            console.log(error);
+          console.log(error);
         }
-        
-
-       
     }
 }
 

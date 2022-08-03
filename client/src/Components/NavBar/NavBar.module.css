@@ -27,16 +27,16 @@
     padding: 5px;
     border-radius: 5px;
     font-family:'Verdana';
-    background-color: #07648f;
-    border-color: goldenrod;
-    color: whitesmoke;
+    background-color: #FFCC33;
+    border-color: rgb(235, 174, 19);
+    color: rgb(131, 89, 33);
     position: relative;
     left: 550px;
 }
 .botact:hover{
-    background-color: #FFCC33;
-    border-color: rgb(235, 174, 19);
-    color: rgb(101, 62, 12);
+    background-color: #07648f;
+    border-color: goldenrod;
+    color: antiquewhite;
 }
 
 .search {

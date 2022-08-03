@@ -50,9 +50,9 @@ export default function CountryDetail(props) {
                 </div>
 
             <div className={s.conact}>
-            <h3 className={s.titulo}>Actividades del País</h3>
+            <h3 className={s.titulod}>Actividades del País</h3>
             {
-                country.Activities ?
+                country.Activities&&country.Activities.length ? 
             country.Activities.map(e => {
                 return (
                         <div>
@@ -64,7 +64,7 @@ export default function CountryDetail(props) {
                         
                     ) 
                  }) 
-                : <p></p>     
+                 : <p>No existen actividades en este país</p> 
             }
              <Link to="/activities"><button className={s.botactd}>Crear Actividad</button></Link>               
             </div>

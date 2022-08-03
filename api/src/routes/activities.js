@@ -17,40 +17,7 @@ router.get('/activities', async (req, res) => {
   
   });
 
-
-
-//Ruta de posteo de nueva actividad
-// router.post('/activities', async (req, res,) => {
-//     const { name, difficulty, duration, season, countries } = req.body;
-
-//     if(!name || !difficulty || !duration || !season || !countries){
-//         return res.status(400).send("Campos incompletos");
-//     }
-
-// try{
-//     const newActivity = await Activity.create ({
-//         name,
-//         difficulty,
-//         duration,
-//         season,
-//         countries
-              
-//     })
-
-//     res.status(200).json(newActivity)
-   
-//     const getId = await Activity.findAll({
-//       where: { name: name}
-//     })
-
-//     const country = await Country.findByPk(countries);
-//     await country.addActivity(getId[0].dataValues.id);
-        
-//   } catch (error) {
-//     res.send(error);
-//   }
-// });  
-
+// Ruta para postear actividades
 router.post('/activities', async (req, res,) => {
   try {
     const {name, difficulty, duration, season, countries} = req.body
