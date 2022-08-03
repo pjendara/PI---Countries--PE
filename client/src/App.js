@@ -4,7 +4,7 @@ import LandingPage from './Components/LandingPage/LandingPage';
 import Home from './Components/Home/Home';
 import CreateActivity from './Components/CreateActivity/CreateActivity';
 import CountryDetail from './Components/CountryDetail/CountryDetail';
-import NavBar from './Components/NavBar/NavBar';
+
 
 function App() {
   return (

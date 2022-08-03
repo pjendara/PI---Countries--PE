@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FILTER_COUNTRIES, GET_COUNTRIES, ORDER_COUNTRIES_ALF, ORDER_COUNTRIES_POP ,GET_TOURIST_ACTIVITIES, GET_COUNTRY_DETAIL, GET_COUNTRIES_QUERY, FILTER_BY_ACTIVITIES } from "../action-types/actionTypes"; 
+import { FILTER_COUNTRIES, GET_COUNTRIES, GET_COUNTRIES_BY_NAME, ORDER_COUNTRIES_ALF, ORDER_COUNTRIES_POP ,GET_TOURIST_ACTIVITIES, GET_COUNTRY_DETAIL, GET_COUNTRIES_QUERY, FILTER_BY_ACTIVITIES } from "../action-types/actionTypes"; 
 
 export function getCountries(){
     return async function(dispatch){
@@ -92,4 +92,14 @@ export function postActivity (payload){
         console.log(response)
         return response
     }
+}
+
+export function getCountriesByName (name) {
+    console.log(name)
+        return {
+            type: GET_COUNTRIES_BY_NAME,
+            payload: name,
+            
+        }
+     
 }

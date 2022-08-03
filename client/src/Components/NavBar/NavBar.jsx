@@ -1,37 +1,31 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
-import getCountriesSearch from "../../Redux/Actions";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { getCountries } from "../../Redux/Actions";
+import { useState, useEffect } from "react";
+import { getCountries, getCountriesByName } from "../../Redux/Actions";
 
 import s from "./NavBar.module.css"
 
 import logo from "../Images/logo.png"
 
-export default function NavBar(){
+export default function NavBar({setCurrentPage}){
 
 const dispatch = useDispatch()
-const [value, setValue] = useState("")
+const [name, setName] = useState("")
+ 
+useEffect(() => {
+    dispatch(getCountries())
+}, [dispatch])
 
 function handleClick(e){
     e.preventDefault();
     dispatch(getCountries());
-    
-}
-
-function handleSubmitBuscar(e){
-    e.preventDefault()
-    dispatch(getCountriesSearch(value))
-    if(!value) alert("Ingrese al menos una letra para su búsqueda")
-    
-    
 }
 
 function handleInputChange(e){
-    e.preventDefault()
-    setValue(e.target.value)
-    
+    dispatch(getCountriesByName(e))
+    setCurrentPage(1)
+        
 }
 
     
@@ -40,12 +34,12 @@ return (
     <div>
     <Link to= "/home"><img className={s.bothome} onClick={(e) => handleClick(e)} src={logo} alt="logo"></img></Link>
     </div>
-    <div className={s.search}>
-            <div className={s.searchtitle} >Encuentra Tu Próximo Destino</div>    
-            <input className={s.searchinp} type = "text" placeholder = "Qué país deseas visitar..."
-            onChange = {(e) => handleInputChange(e)} />
-            <button className={s.searchbot} type="submit" onClick={(e) => handleSubmitBuscar(e)}>Buscar</button>
-            </div>
+    <div  className={s.search}>
+        <div className={s.searchtitle}>Encuentra Tu Próximo Destino</div>    
+           <input className={s.searchinp} value={name} type = "text" placeholder = "Qué país deseas visitar..."
+            onChange = {(e) => {setName(e.target.value); handleInputChange(e.target.value)}} />
+           </div>
+            
     <Link to= "/activities"><button className={s.botact}>Crear Actividad</button></Link>       
     </div>
     

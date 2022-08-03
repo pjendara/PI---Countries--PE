@@ -1,4 +1,4 @@
-import { FILTER_COUNTRIES, FILTER_BY_ACTIVITIES, GET_COUNTRIES, GET_TOURIST_ACTIVITIES, ORDER_COUNTRIES_ALF, ORDER_COUNTRIES_POP, GET_COUNTRY_DETAIL, ADD_TOURIST_ACTIVITIES, GET_COUNTRIES_QUERY } from "../action-types/actionTypes";
+import { FILTER_COUNTRIES, FILTER_BY_ACTIVITIES, GET_COUNTRIES, GET_COUNTRIES_BY_NAME, GET_TOURIST_ACTIVITIES, ORDER_COUNTRIES_ALF, ORDER_COUNTRIES_POP, GET_COUNTRY_DETAIL, ADD_TOURIST_ACTIVITIES, GET_COUNTRIES_QUERY } from "../action-types/actionTypes";
 
 const initialState = {
     countries: [],
@@ -47,7 +47,7 @@ function rootReducer (state = initialState, action){
                 ...state,
                 countries: sortedArr
             }
-            case ORDER_COUNTRIES_POP:
+        case ORDER_COUNTRIES_POP:
                 let sortedArrPop = action.payload === "mayp" ?
                 state.countries.sort(function (a, b) {
                     if(a.population > b.population) {
@@ -93,26 +93,35 @@ function rootReducer (state = initialState, action){
         case FILTER_BY_ACTIVITIES:
             const allCountries2 = state.allCountries;
 
-      const solo = allCountries2.filter((pais) => {
-        return pais.Activities.length > 0;
-      });
+            const solo = allCountries2.filter((pais) => {
+             return pais.Activities.length > 0;
+             });
 
-      let array = [];
+            let array = [];
 
-      for (let i = 0; i < solo.length; i++) {
-        for (let j = 0; j < solo[i].Activities.length; j++) {
-          if (solo[i].Activities[j].name === action.payload) {
-            array.push(solo[i]);
-          }
+            for (let i = 0; i < solo.length; i++) {
+            for (let j = 0; j < solo[i].Activities.length; j++) {
+             if (solo[i].Activities[j].name === action.payload) {
+                   array.push(solo[i]);
+                 }
+                }
+                }
+
+            const filtro = action.payload === "Todos" ? allCountries2 : array;
+
+            return {
+                 ...state,
+                 countries: filtro,
         }
-      }
-
-      const filtro = action.payload === "Todos" ? allCountries2 : array;
-
-      return {
-        ...state,
-        countries: filtro,
-      }    
+        case GET_COUNTRIES_BY_NAME:
+            console.log(action.payload)
+            let nombre = action.payload === "" ? state.allCountries : state.countries.filter((e) => e.name.toLowerCase().includes(action.payload.toLowerCase()))
+            console.log(action.payload)
+            return{
+                ...state,
+                countries: nombre
+                
+            }    
         default:
             return state;
     

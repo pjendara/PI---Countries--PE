@@ -66,7 +66,9 @@ export default function Home (){
     return (
         <div className={s.prindiv}>
             
-            <div ><NavBar/></div>
+            <div ><NavBar
+            setCurrentPage={setCurrentPage}
+            /></div>
             
             <div className={s.filtros}>
             <div>
