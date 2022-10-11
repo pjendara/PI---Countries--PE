@@ -39,7 +39,7 @@ html, body {
 .cardd {
     border-radius: 3%;
     margin: 40px;
-    background-color: rgba(239, 236, 216, 0.69);
+    background-color: rgba(248, 248, 248, 0.471);
     min-height: 500px;
     width:fit-content;
     justify-content: center;
@@ -59,7 +59,7 @@ html, body {
     margin-left: 70px;
     border-radius: 3%;
     margin: 40px;
-    background-color: rgba(255, 255, 255, 0.281);
+    background-color: rgba(255, 255, 255, 0.362);
     position: relative;
     left: 50px;
     

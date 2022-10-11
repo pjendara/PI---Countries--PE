@@ -18,8 +18,8 @@ export default function Home (){
     const [orden, setOrden]= useState("")
 
     const [currentPage, setCurrentPage] = useState(1)
-    let [countriesPerPage, setCountriesPerPage] = useState(10)
-    if(currentPage === 1) countriesPerPage = 9;
+    let [countriesPerPage, setCountriesPerPage] = useState(12)
+    
     
             
 
@@ -72,7 +72,7 @@ export default function Home (){
             
             <div className={s.filtros}>
             <div>
-                Ordena Alfabéticamente    
+                Orden Alfabético    
             <select className={s.select} onChange={e => handleSort(e)}>
                 <option></option>
                 <option value="asc">Ascendente</option>
@@ -80,7 +80,7 @@ export default function Home (){
             </select>
             </div>
             <div>
-                Ordena por Número de Habitantes
+                Número de Habitantes
             <select className={s.select} onChange={e => handleSortPop(e)}>
                 <option></option>
                 <option value="mayp">Menor a Mayor</option>
@@ -97,7 +97,7 @@ export default function Home (){
                 <option value={"Asia"}>Asia</option>
                 <option value={"Europe"}>Europa</option>
                 <option value={"Oceania"}>Oceanía</option>
-                <option value={"Antarctica"}>Antarctica</option>
+                <option value={"Antarctica"}>Antárctica</option>
             </select>
             </div>
             <div>
@@ -112,13 +112,18 @@ export default function Home (){
                 }
             </div>
             </div>
+
+            <div className={s.contenedorCards}>    
            {currentCountries?.map( (e) => {
                return (
-                <div className={s.contenedorCards}>
+                <div className={s.Card}>
                 <Card imgFlag={e.imgFlag} name={e.name} continent={e.continent} key={e.id} id={e.id} />
                 </div>
-            )
-        })}
+                )
+                })}
+            </div>
+
+
             <div className={s.paginado}>
             <Paginado
             countriesPerPage = {countriesPerPage}
@@ -130,8 +135,3 @@ export default function Home (){
         </div>
     )
 }
-
-
-
-// por continente y por tipo de actividad turística ---- 
-// ascendentemente como descendentemente los países por orden alfabético y por cantidad de población

@@ -1,24 +1,21 @@
 .card{
     border-radius: 3%;
-    background-color: rgba(239, 236, 216, 0.69);
-    height: 300px;
-    width: 300px;
+    background-color: rgba(255, 255, 255, 0.443);
+    height: 250px;
+    width: 270px;
     display: flex;
     justify-content: center;
     align-content: center;
     flex-direction: column;
-    
+    margin: 15px;
+      
 }
 
 .bandera{
     border-radius: 4%;
-    width: 9em;
-    height: 6em;
-    position: relative;
-    top: -30px;
-    left: 78px;
-    margin-top: 15px;
-    margin-bottom: -30px;
+    width: 8em;
+    height: 5.5em;
+        
 }
 
 .titulo{
@@ -26,9 +23,7 @@
     font-weight: bolder;
     font-size: x-large;
     text-align: center;
-    margin-bottom: -10px; 
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 10px 0px -15px 0px ;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -37,23 +32,24 @@
 .continente {
     color: rgb(9, 57, 154);
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .boton {
     border-radius: 5px;
-    color:#07648f;;
+    color:#07648f;
     background-color: antiquewhite;
     width: 5em;
     padding: 3px;
     border-color: #07648f;
-    position: relative;
-    top: 20px
+    font-family: 'Arvo', serif;
+    
 }
 
 .boton:hover {
     color: antiquewhite;
     background-color: #07648f;
     border-color: #07648f;
+    width: 5.2em;
 }
 

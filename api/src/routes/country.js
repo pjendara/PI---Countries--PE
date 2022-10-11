@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const axios = require("axios")
 const {Op, Country, Activity} = require("../db.js");
+const e = require('express');
 
 
 
@@ -9,8 +10,9 @@ const router = Router();
 //trae los paises de la API
 const getApiInfo = async () => {
     const response = await axios.get("https://restcountries.com/v3/all")
-    const map = await response.data.map(e => {
-      const country = {
+       
+    const map = response.data.map(e => {
+    const country = {
         id: e.cca3,
         name: e.name.common,
         imgFlag: e.flags[1],
@@ -21,6 +23,7 @@ const getApiInfo = async () => {
         population: e.population
         }
         return country
+    
     })
     return map
     };

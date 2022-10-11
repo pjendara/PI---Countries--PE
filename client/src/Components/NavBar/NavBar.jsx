@@ -31,16 +31,19 @@ function handleInputChange(e){
     
 return (
     <div className={s.navbar}>
-    <div>
+    <div className={s.contLogo}>
     <Link to= "/home"><img className={s.bothome} onClick={(e) => handleClick(e)} src={logo} alt="logo"></img></Link>
     </div>
-    <div  className={s.search}>
+    <div className={s.contSearch}>
+    <div className={s.search}>
         <div className={s.searchtitle}>Encuentra Tu Próximo Destino</div>    
            <input className={s.searchinp} value={name} type = "text" placeholder = "Qué país deseas visitar..."
             onChange = {(e) => {setName(e.target.value); handleInputChange(e.target.value)}} />
            </div>
-            
-    <Link to= "/activities"><button className={s.botact}>Crear Actividad</button></Link>       
+    </div>
+        <div className={s.contAct}>    
+        <Link to= "/activities"><button className={s.botact}>Crear Actividad</button></Link>       
+        </div>
     </div>
     
 )

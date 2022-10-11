@@ -1,5 +1,7 @@
 .contpag {
     margin: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .botpag {
@@ -17,6 +19,5 @@
 .botpag:hover {
     background-color: wheat ;
     color: #000;
-    height: 3.4em;
-    width: 3.4em;
+    scale: 105%;
 }

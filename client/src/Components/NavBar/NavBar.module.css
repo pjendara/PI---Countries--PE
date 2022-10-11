@@ -1,20 +1,16 @@
 .navbar {
     background-color: #FDC500;
     align-items: center;
-    justify-content: center;
     height: 100px;
     width: 100%;
     display: inline-flex;
-       
+    justify-content: center;
+    align-content: center;
+            
 }
 
 .bothome {
     height: 95px;
-    position: absolute;
-    display: inline-flex;
-    left: 200px;
-    top: 0px;
-    
 }
 
 .bothome:hover {
@@ -23,16 +19,15 @@
 }
 
 .botact {
-    font-size: large;
     padding: 5px;
     border-radius: 5px;
-    font-family:'Verdana';
-    font-weight: bold;
     background-color: #FFCC33;
     border-color: rgb(235, 174, 19);
     color: rgb(131, 89, 33);
-    position: relative;
-    left: 550px;
+    font-family: 'Arvo', serif;
+    font-weight: 700;
+    font-size:medium;
+    
 }
 .botact:hover{
     background-color: #07648f;
@@ -41,14 +36,13 @@
 }
 
 .search {
-    position:relative;
     padding: 5px;
-    left: 57px;
-    
+    margin-top: 15px;           
 }
 
 .searchtitle {
     color: #0C7296;
+    font-family: 'Arvo', serif;
     font-weight: bolder;
     font-size: large;
 }
@@ -56,6 +50,18 @@
 .searchinp {
     border-radius: 5px;
     border-color: #FDC500;
-    margin: 5px;
+    margin: 8px;
     padding: 3px;
+}
+
+.contAct {
+    width: 33%;
+}
+
+.contSearch {
+    width: 33%;
+}
+
+.contLogo {
+    width: 33%;
 }
