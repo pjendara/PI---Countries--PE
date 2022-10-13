@@ -43,10 +43,7 @@ export function getCountriesDetail(id){
             })
         } catch (error){
           console.log(error);
-        }
-        
-
-       
+        }     
     }
 }
 

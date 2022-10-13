@@ -66,7 +66,7 @@ export default function Home (){
     return (
         <div className={s.prindiv}>
             
-            <div ><NavBar
+            <div><NavBar
             setCurrentPage={setCurrentPage}
             /></div>
             
@@ -114,13 +114,13 @@ export default function Home (){
             </div>
 
             <div className={s.contenedorCards}>    
-           {currentCountries?.map( (e) => {
+           {currentCountries.length?currentCountries.map( (e) => {
                return (
                 <div className={s.Card}>
                 <Card imgFlag={e.imgFlag} name={e.name} continent={e.continent} key={e.id} id={e.id} />
                 </div>
                 )
-                })}
+                }):<h1>no hay paises</h1>}
             </div>
 
 
