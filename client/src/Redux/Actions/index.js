@@ -3,7 +3,7 @@ import { FILTER_COUNTRIES, GET_COUNTRIES, GET_COUNTRIES_BY_NAME, ORDER_COUNTRIES
 
 export function getCountries(){
     return async function(dispatch){
-        let json = await axios.get("http://localhost:3001/countries",{
+        let json = await axios.get("https://pi-countries-pe-production.up.railway.app/countries",{
         });
     return dispatch({
         type: GET_COUNTRIES,
@@ -36,7 +36,7 @@ export function orderByPop(payload) {
 export function getCountriesDetail(id){
     return async function (dispatch){
         try {
-            var json = await axios.get("http://localhost:3001/countries/" + id)
+            var json = await axios.get("https://pi-countries-pe-production.up.railway.app/countries/" + id)
             return dispatch ({
                 type: GET_COUNTRY_DETAIL,
                 payload: json.data
@@ -53,7 +53,7 @@ export function getCountriesDetail(id){
 export default function getCountriesSearch(name){
     return async function (dispatch){
         try {
-            var json = await axios.get("http://localhost:3001/countries?name=" + name.charAt(0).toUpperCase() + name.slice(1))
+            var json = await axios.get("https://pi-countries-pe-production.up.railway.app/countries?name=" + name.charAt(0).toUpperCase() + name.slice(1))
             return dispatch ({
                 type: GET_COUNTRIES_QUERY,
                 payload: json.data
@@ -74,7 +74,7 @@ export function filterByAct(activity){
 export function getActivities(){
     return (dispatch) => {
         axios
-          .get(`http://localhost:3001/activities`)
+          .get(`https://pi-countries-pe-production.up.railway.app/activities`)
           .then((info) => {
             return dispatch({
               type: GET_TOURIST_ACTIVITIES,
@@ -88,7 +88,7 @@ export function getActivities(){
 
 export function postActivity (payload){
     return async function(dispatch){
-        const response = await axios.post("http://localhost:3001/activities", payload)
+        const response = await axios.post("https://pi-countries-pe-production.up.railway.app/activities", payload)
         console.log(response)
         return response
     }
